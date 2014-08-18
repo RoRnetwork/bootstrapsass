@@ -4,6 +4,6 @@ class PostMailer < ActionMailer::Base
     @post = post
     attachments.inline["#{post.image_identifier}"]=File.read("public#{post.image.to_s}")
     @url  = 'http://rornetwork.com/login'
-    mail(to: "iashanmugavel@gmail.com", subject: 'A new post is shared!')
+    mail(to: "iashanmugavel@gmail.com", subject: 'A new post has been shared!')
   end
 end

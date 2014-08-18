@@ -26,3 +26,17 @@ Add in `Gemfile`
 
 	gem 'carrierwave
 
+
+
+To send attachment via email add this ` attachments.inline` in `model_mailer.rb` file.
+````ruby
+class PostMailer < ActionMailer::Base
+  default from: "info@rornetwork.com"
+  def post_email(post)
+    @post = post
+    attachments.inline["#{post.image_identifier}"]=File.read("public#{post.image.to_s}")
+    @url  = 'http://rornetwork.com/login'
+    mail(to: "iashanmugavel@gmail.com", subject: 'A new post has been shared!')
+  end
+end
+````
