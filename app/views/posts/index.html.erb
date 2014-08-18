@@ -1,8 +1,8 @@
 <h1>Listing posts</h1>
 
 
-
-<%= paginate @posts %>
+<%= will_paginate @collection, renderer: BootstrapPagination::Rails %>
+<%#= paginate @posts %>
 
 
 <br>

@@ -59,7 +59,6 @@ To install kaminari default(without any style)
 Add in `Gemfile`,
 
 		gem 'kaminari-bootstrap'
-			
 
 To install kaminari bootstrap
 
@@ -70,4 +69,32 @@ Creating friendly URLs and caching, add in `routes.rb`,
 	resources :my_resources do
 	  get 'page/:page', :action => :index, :on => :collection
 	end
+
+in `controller`
+
+	@posts = Post.page(params[:page]).per(1)
+
+in `views`
+
+	<%= paginate @users %>
+
+
+####Will_Paginate
+
+	gem 'will_paginate'
+	gem 'will_paginate-bootstrap'
+
+
+in `controller`
+
+	@posts = Post.paginate(:page => params[:page], :per_page => 30)
+
+
+in `views`,
+
+	<%= will_paginate @collection, renderer: BootstrapPagination::Rails %>
+
+without `bootstrap`
+
+	<%= will_paginate @posts %>
 
