@@ -138,12 +138,12 @@ in /app/views/posts/_form.html.erb
 
 in /app/views/posts/index.html.erb	  	
 
-	<p>Tags: <%= raw article.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
+	<p>Tags: <%= raw post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
 	
 
 /config/routes.rb 
 
-	get 'tags/:tag', to: 'articles#index', as: :tag
+	get 'tags/:tag', to: 'posts#index', as: :tag
 
 
 /app/controllers/posts_controller.rb 
@@ -173,7 +173,7 @@ Adding a Tag Cloud
 	</div>
 
 
-/app/assets/stylesheets/articles.css.scss
+/app/assets/stylesheets/posts.css.scss
 ````scss
 #tag_cloud {
   width: 400px;
