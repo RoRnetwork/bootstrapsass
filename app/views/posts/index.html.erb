@@ -1,6 +1,10 @@
 <h1>Listing posts</h1>
 
 
+
+<%= paginate @posts %>
+
+
 <br>
 <div class="list-group">
   <% @posts.each do |post| %>

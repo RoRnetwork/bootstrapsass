@@ -1,5 +1,6 @@
 ###Bootstrap SASS
 
+####Bootstrap
 Add in `Gemfile`,
 
 
@@ -13,6 +14,8 @@ Change the extension of `app/assets/stylesheets/applciation.css` file as `..../a
 
 	@import "bootstrap"
 
+
+####Simple_Form
 Add in `Gemfile`,
 	
 	gem 'simple_form'
@@ -22,12 +25,14 @@ simple installation
 
 	rails g simple_form:install --bootstrap
 
+
+####Carrierwave
 Add in `Gemfile`
 
 	gem 'carrierwave
 
 
-
+####Mail Attachment
 To send attachment via email add this ` attachments.inline` in `model_mailer.rb` file.
 ````ruby
 class PostMailer < ActionMailer::Base
@@ -40,3 +45,29 @@ class PostMailer < ActionMailer::Base
   end
 end
 ````
+####Pagination
+
+#####Kaminari
+
+		gem 'kaminari'
+		
+
+To install kaminari default(without any style)
+	
+		rails g kaminari:views default
+
+Add in `Gemfile`,
+
+		gem 'kaminari-bootstrap'
+			
+
+To install kaminari bootstrap
+
+		rails g kaminari:views bootstrap
+
+Creating friendly URLs and caching, add in `routes.rb`,
+
+	resources :my_resources do
+	  get 'page/:page', :action => :index, :on => :collection
+	end
+
