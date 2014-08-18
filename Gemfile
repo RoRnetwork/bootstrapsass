@@ -38,3 +38,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'quiet_assets'
+gem 'simple_form'
+gem 'bootstrap-sass'
+gem 'carrierwave'
