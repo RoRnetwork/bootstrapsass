@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :comments
 
   resources :posts
+  get 'tags/:tag', to: 'posts#index', as: :tag
   #resources :posts do
    # get 'page/:page', :action => :index, :on => :collection
   #end

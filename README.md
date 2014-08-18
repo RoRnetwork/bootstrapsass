@@ -98,3 +98,89 @@ without `bootstrap`
 
 	<%= will_paginate @posts %>
 
+
+###acts_as_taggable_on
+
+in `Gemfile`
+
+	gem 'acts-as-taggable-on'
+
+then,Install migrations
+
+	rake acts_as_taggable_on_engine:install:migrations
+
+Review the generated migrations then migrate :
+
+	rake db:migrate
+
+
+usage,in `models/post.rb`
+
+````ruby
+class Post < ActiveRecord::Base
+	mount_uploader :image, ImageUploader
+	acts_as_taggable	
+end
+````
+
+in controller,
+````ruby
+class PostsController < ApplicationController
+  def post_params
+    params.require(:post).permit(:title, :text, :image,:tag_list)
+  end
+end
+````
+
+in /app/views/posts/_form.html.erb 
+
+	<%= f.input :tag_list %>
+
+in /app/views/posts/index.html.erb	  	
+
+	<p>Tags: <%= raw article.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
+	
+
+/config/routes.rb 
+
+	get 'tags/:tag', to: 'articles#index', as: :tag
+
+
+/app/controllers/posts_controller.rb 
+
+````ruby
+
+
+def index
+  if params[:tag]
+    @posts = Post.tagged_with(params[:tag])
+  else
+    @posts = Post.all
+  end
+end
+
+````
+	
+Adding a Tag Cloud
+
+
+/app/views/posts/index.html.erb
+
+	<div id="tag_cloud">
+	  <% tag_cloud Post.tag_counts, %w{s m l} do |tag, css_class| %>
+	    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+	  <% end %>
+	</div>
+
+
+/app/assets/stylesheets/articles.css.scss
+````scss
+#tag_cloud {
+  width: 400px;
+  line-height: 1.6em;
+  .s { font-size: 0.8em; }
+  .m { font-size: 1.2em; }
+  .l { font-size: 1.8em; }
+}
+
+````

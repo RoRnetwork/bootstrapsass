@@ -6,8 +6,13 @@ class PostsController < ApplicationController
   def index
     #@posts = Post.all
     #@posts = Post.page(params[:page]).per(1)
-    @posts = Post.paginate(:page => params[:page], :per_page => 1)
-
+    
+    if params[:tag]
+      @posts = Post.tagged_with(params[:tag]).paginate(:page => params[:page], :per_page => 5)
+   
+    else
+      @posts = Post.paginate(:page => params[:page], :per_page => 10)   
+    end
   end
 
   # GET /posts/1
@@ -73,6 +78,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :text, :image)
+      params.require(:post).permit(:title, :text, :image,:tag_list)
     end
 end
